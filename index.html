@@ -62,7 +62,10 @@
     let call = null;
     let matched = false;
 
-    const SERVER_BASE = "https://6af5-95-102-48-237.ngrok-free.app";
+    const SERVER_BASE = "https://voice-roulette-hwtohwkcj-mollys-projects-192d96da.vercel.app";
+    const PEERJS_HOST = "6af5-95-102-48-237.ngrok-free.app";
+    const PEERJS_PORT = 9000;
+    const PEERJS_PATH = "/";
 
     function logStatus(msg) {
       statusEl.textContent = msg;
@@ -84,7 +87,12 @@
       logStatus("🔎 Поиск собеседника...");
       toggleLoader(true);
 
-      peer = new Peer();
+      peer = new Peer({
+        host: PEERJS_HOST,
+        port: PEERJS_PORT,
+        path: PEERJS_PATH,
+        secure: true
+      });
 
       peer.on("open", async (id) => {
         try {
