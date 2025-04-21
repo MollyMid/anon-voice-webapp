@@ -62,6 +62,8 @@
     let call = null;
     let matched = false;
 
+    const SERVER_BASE = "https://19d8-95-102-48-237.ngrok-free.app";
+
     function logStatus(msg) {
       statusEl.textContent = msg;
     }
@@ -86,7 +88,7 @@
 
       peer.on("open", async (id) => {
         try {
-          const response = await fetch("http://localhost:5000/join", {
+          const response = await fetch(`${SERVER_BASE}/join`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ tg_id: tgId, peer_id: id })
@@ -147,7 +149,7 @@
       matched = false;
 
       if (tgId) {
-        await fetch("http://localhost:5000/leave", {
+        await fetch(`${SERVER_BASE}/leave`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ tg_id: tgId })
