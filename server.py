@@ -6,6 +6,10 @@ CORS(app)
 
 waiting_users = []
 
+@app.route("/")
+def home():
+    return jsonify({"status": "API работает"})
+
 @app.route("/join", methods=["POST"])
 def join():
     data = request.json
@@ -20,7 +24,7 @@ def join():
             "partner_peer_id": partner["peer_id"],
             "partner_tg_id": partner["tg_id"]
         })
-    
+
     # Иначе добавляем в очередь
     waiting_users.append({"tg_id": tg_id, "peer_id": peer_id})
     return jsonify({"status": "waiting"})
